@@ -7,3 +7,8 @@ pip install -r requirements.txt
 django-admin startproject proyectoWeb .
 python manage.py startapp ProyectoWebApp
 python manage.py runserver
+python manage.py startapp servicios
+python -m pip install Pillow
+python manage.py makemigrations
+python manage.py migrate
+
