@@ -11,4 +11,6 @@ python manage.py startapp servicios
 python -m pip install Pillow
 python manage.py makemigrations
 python manage.py migrate
+python manage.py createsuperuser
+
 
