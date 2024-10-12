@@ -12,5 +12,8 @@ python -m pip install Pillow
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
+python manage.py startapp blog
+python manage.py makemigrations blog
+python manage.py migrate blog
 
 
