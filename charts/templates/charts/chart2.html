@@ -1,0 +1,45 @@
+{% extends 'ProyectoWebApp/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Gráfico de Datos</h2>
+        <div id="container" style="width:100%; height:400px;"></div>
+
+        <!-- Usa json_script para incrustar los datos en el HTML -->
+        {{ categories|json_script:"categories-data" }}
+        {{ data|json_script:"series-data" }}
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                // Lee los datos JSON incrustados en el HTML
+                var categories = JSON.parse(document.getElementById('categories-data').textContent);
+                var seriesData = JSON.parse(document.getElementById('series-data').textContent);
+
+                // Inicializar Highcharts
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Monthly Data'
+                    },
+                    xAxis: {
+                        categories: categories
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Value'
+                        }
+                    },
+                    series: [{
+                        name: 'Data Series',
+                        data: seriesData
+                    }]
+                });
+            });
+        </script>
+    </div>
+{% endblock %}
+
+
+

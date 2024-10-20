@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ProyectoWebApp.apps.ProyectowebappConfig',
     'servicios.apps.ServiciosConfig',
     'blog.apps.BlogConfig',
+    'charts.apps.ChartsConfig',
 ]
 
 MIDDLEWARE = [

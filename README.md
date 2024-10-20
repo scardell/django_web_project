@@ -15,5 +15,6 @@ python manage.py createsuperuser
 python manage.py startapp blog
 python manage.py makemigrations blog
 python manage.py migrate blog
+pip freeze > requirements.txt
 
 

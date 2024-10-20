@@ -1,0 +1,52 @@
+{% extends 'ProyectoWebApp/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Gráfico Pie con Drilldown</h2>
+        <div id="container" style="width:100%; height:400px;"></div>
+
+        <!-- Serializamos los datos usando json_script -->
+        {{ series|json_script:"series-data" }}
+        {{ drilldown_series|json_script:"drilldown-data" }}
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                // Recuperar los datos desde el HTML
+                var seriesData = JSON.parse(document.getElementById('series-data').textContent);
+                var drilldownData = JSON.parse(document.getElementById('drilldown-data').textContent);
+
+                // Depurar los datos en la consola del navegador
+                console.log('Series Data:', seriesData);
+                console.log('Drilldown Data:', drilldownData);
+
+                // Inicializar el gráfico de Highcharts
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Market share of browsers'
+                    },
+                    subtitle: {
+                        text: 'Click the slices to view versions.'
+                    },
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}: {point.y:.1f}%'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+                    },
+                    series: seriesData,
+                    drilldown: {
+                        series: drilldownData
+                    }
+                });
+            });
+        </script>
+    </div>
+{% endblock %}
